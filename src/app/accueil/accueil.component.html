@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="/assets/logo1.png" width="150">
+        </div>
+        <div class="col-sm-9">
+            <br>
+                <p class="entete">
+           
+                    <a (click)="goToPage('connexion')">
+                        <mat-icon class="iconentete" style="color: red;">power_settings_new</mat-icon>
+                    </a>
+                </p>
+            </div><br><br>
+        
+    </div>
+    <div class="container  topBotomBordersIn">
+        <a routerLink="/accueil">ACCEUIL</a>
+
+    </div>
+
+    <br><br><br><br>
+    <!-- affichage du table  -->
+    <mat-form-field class="px-16" style="width: 30%">
+        <input matInput #filter placeholder="Search..." [(ngModel)]="data" id="listSearch" autocomplete="off"
+            style="width: 100%">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th style="text-transform: uppercase; letter-spacing: 1px;">NOM ET PRENOM CANDIDATS</th>
+                    <th style="text-transform: uppercase; letter-spacing: 1px;">Nom Et prenom Formateur</th>
+                    <th style="text-transform: uppercase; letter-spacing: 1px;">DATE DE DEBUT DE FORMATION</th>
+                    <th style="text-transform: uppercase; letter-spacing: 1px;">Etat</th>
+                    <th style="text-transform: uppercase; letter-spacing: 1px;">Certificat</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let p of formation.results | filter: data">
+                <tr>
+                    <td style="text-transform: uppercase;"> {{ p.Nom }} {{ p.Prenom }}</td>
+                    <td style="text-transform: uppercase;">{{ p.Formateur }}</td>
+                    <td>{{p.Date_debut}}</td>
+                    <td>
+                        {{ p.etats }}
+                    </td>
+                    <td>
+                        <div  *ngIf="p.etats == 'Facturé'" class="form-check form-switch ">
+                            <mat-icon class="greenicon" type="button" matTooltip="Télecharger votre certificat"
+                                (click)="opendialog(p)">picture_as_pdf
+                            </mat-icon>
+                        </div>
+                        <div  *ngIf="p.etats == 'SDF'" class="form-check form-switch ">
+                            <mat-icon class="greyicon">picture_as_pdf
+                            </mat-icon>
+                        </div>
+                    </td>
+                </tr>
+            <tbody>
+        </table>
+    </div>
+</div>
